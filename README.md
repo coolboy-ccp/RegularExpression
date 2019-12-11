@@ -13,6 +13,9 @@
 \S|匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
 \t|匹配一个制表符。等价于 \x09 和 \cI。
 \v|匹配一个垂直制表符。等价于 \x0b 和 \cK。
+\num|匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。
+\g|正则表达式后面的全局标记 g 指定将该表达式应用到输入字符串中能够查找到的尽可能多的匹配
+\i|表达式的结尾处的不区分大小写 i 标记指定不区分大小写。
 ## 特殊字符
 字符|解释|
 -|-
@@ -45,3 +48,46 @@ reg2 = '<.*?>'
 str match reg1 = '<h1>RUNOOB-菜鸟教程</h1>'
 str match reg2 = 'h1'
 ```
+## 定位符
+字符|解释
+^|匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。
+$|匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。
+\b|匹配一个单词边界，即字与空格间的位置。
+\B|非单词边界匹配。
+(pattern)|匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。
+(?:pattern)|匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。
+(?=pattern)|正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，"Windows(?=95|98|NT|2000)"能匹配"Windows2000"中的"Windows"，但不能匹配"Windows3.1"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+(?!pattern)|正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如"Windows(?!95|98|NT|2000)"能匹配"Windows3.1"中的"Windows"，但不能匹配"Windows2000"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+(?<=pattern)|反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，"(?<=95|98|NT|2000)Windows"能匹配"2000Windows"中的"Windows"，但不能匹配"3.1Windows"中的"Windows"。
+(?<!pattern)|反向否定预查，与正向否定预查类似，只是方向相反。例如"(?<!95|98|NT|2000)Windows"能匹配"3.1Windows"中的"Windows"，但不能匹配"2000Windows"中的"Windows"。
+
+
+## Example
+* \b, \B
+```
+str = ’Chapter 10‘
+str1 = ‘aptitude’
+reg1 = '\bapt‘
+reg2 = '\Bapt'
+str match reg1 = nil
+str match reg2 = 'apt'
+str1 match reg1 = 'apt'
+str1 match reg2 = nil
+```
+* 子表达式
+```
+var str = "http://ww.runoob.com:80/html/html-tutorial.html";
+var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/;
+arr = str.match(patt1);
+print(arr)
+/*
+result: http://ww.runoob.com:80/html/html-tutorial.html
+http
+ww.runoob.com
+:80
+/html/html-tutorial.html
+*/
+
+```
+
+
