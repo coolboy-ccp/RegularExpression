@@ -5,4 +5,4 @@
 ## 非打印字符
 字符|解释|
 - | -
-: \cx|control+x,x为A-Z,a-z
+\cx|control+x,x为A-Z,a-z
