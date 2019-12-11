@@ -64,13 +64,12 @@ extension Reg {
         case .bankID:
             return ""
         case .num(let n):
-            return ""
+            return "\\d{\(n)}"
         case .char(let n):
-            return ""
+            return "[a-zA-Z]{\(n)}"
         case .numChar(let n):
-            return ""
-        default:
-            return ""
+            return "[a-zA-Z0-9]{\(n)}"
+
         }
     }
     
