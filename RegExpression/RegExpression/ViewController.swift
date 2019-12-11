@@ -12,8 +12,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        _ = "340828199103056314".isID()
+        // Do any ()additional setup after loading the view.
     }
+    
 
 
 }
