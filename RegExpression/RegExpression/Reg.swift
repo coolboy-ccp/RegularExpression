@@ -70,6 +70,8 @@ extension Reg {
         case .numChar(let n):
             return "[a-zA-Z0-9]{\(n)}"
 
+        case .url:
+            return "^http(s)?://([^/:]+)(:\\d*)?([^#]*/)?"
         }
     }
     
@@ -138,5 +140,9 @@ extension String {
         } % 11
         return last == Character("\(rlts[idx])")
             
+    }
+    
+    func isURL() -> Bool {
+        return Reg.url.match(with: self)
     }
 }

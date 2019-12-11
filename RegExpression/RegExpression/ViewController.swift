@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = "340828199103056314".isID()
+        let isurl = "http://www.baidu.com".isURL()
         // Do any ()additional setup after loading the view.
     }
     
